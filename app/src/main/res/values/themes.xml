@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SimpRick" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SimpRick" parent="Base.Theme.SimpRick" />
+
+    <style name="ShapeAppearanceOverlay.SimpleMorty" parent="">
+        <item name="cornerSize">10%</item>
+        <item name="cornerFamily">cut</item>
+        <!--        <item name="cornerSizeTopLeft">35%</item>-->
+        <!--        <item name="cornerSizeBottomRight">35%</item>-->
+    </style>
+</resources>
