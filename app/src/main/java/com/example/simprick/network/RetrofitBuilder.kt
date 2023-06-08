@@ -2,7 +2,7 @@ package com.example.simprick.network
 
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.rickmorty.utils.Constants.BASE_URL
+import com.example.simprick.utils.Constants.BASE_URL
 import com.example.simprick.sharedApplicationContext
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -6,7 +6,7 @@ import com.example.simprick.model.charById.CharByIdResponse
 import javax.inject.Inject
 import kotlin.math.max
 
-private const val STARTING_KEY = 0
+private const val STARTING_KEY = 1
 
 class CharPagingSource @Inject constructor(private val charRepository: CharRepository) :
     PagingSource<Int, CharByIdResponse>() {
