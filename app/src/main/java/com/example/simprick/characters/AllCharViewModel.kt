@@ -6,8 +6,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.simprick.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class AllCharViewModel @Inject constructor(private val charRepository: CharRepository) :
     ViewModel() {
 
@@ -16,8 +18,6 @@ class AllCharViewModel @Inject constructor(private val charRepository: CharRepos
             pageSize = Constants.PAGE_SIZE,
             prefetchDistance = Constants.PREFETCH_DISTANCE,
             enablePlaceholders = false
-        )
-    ) {
-        CharPagingSource(charRepository)
-    }.flow.cachedIn(viewModelScope)
+        ), pagingSourceFactory = { charRepository.charPagingSource() }
+    ).flow.cachedIn(viewModelScope)
 }

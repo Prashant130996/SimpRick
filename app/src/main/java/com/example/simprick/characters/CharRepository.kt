@@ -14,10 +14,13 @@ class CharRepository @Inject constructor(private val apiClient: ApiClient) {
         return request.body
     }
 
+
     suspend fun getAllChars(pageIndex: Int): SimpleResponse<AllCharsResponse>? {
         val request = apiClient.getAllChars(pageIndex)
         if (request.failed or !request.isSuccessful) return null
         return request
     }
+
+    fun charPagingSource() = CharPagingSource(CharRepository(apiClient))
 
 }

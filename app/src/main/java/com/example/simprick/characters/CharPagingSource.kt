@@ -21,27 +21,14 @@ class CharPagingSource @Inject constructor(private val charRepository: CharRepos
         val startKey = params.key ?: STARTING_KEY
         val range = startKey.until(startKey + params.loadSize)
 
-        val chars = charRepository.getAllChars(startKey)
+        val response = charRepository.getAllChars(startKey)
+        val charResponse = response?.body
+        val chars = charResponse?.results
 
-        chars?.exception?.let { return LoadResult.Error(it) }
+        response?.exception?.let { return LoadResult.Error(it) }
 
         return LoadResult.Page(
-            data = chars!!.body.results.map { charsById ->
-                CharByIdResponse(
-                    created = charsById.created,
-                    episode = charsById.episode,
-                    gender = charsById.gender,
-                    id = charsById.id,
-                    image = charsById.image,
-                    location = charsById.location,
-                    name = charsById.name,
-                    origin = charsById.origin,
-                    species = charsById.species,
-                    status = charsById.status,
-                    type = charsById.type,
-                    charsById.url
-                )
-            },
+            data = chars.orEmpty(),
             prevKey = when (startKey) {
                 STARTING_KEY -> null
                 else -> when (val prevKey = ensureValidKey(key = range.first - params.loadSize)) {
@@ -50,7 +37,7 @@ class CharPagingSource @Inject constructor(private val charRepository: CharRepos
                     else -> prevKey
                 }
             },
-            nextKey = getPageIndexFromNext(chars.body.info.next)
+            nextKey = getPageIndexFromNext(charResponse?.info?.next)
         )
     }
 

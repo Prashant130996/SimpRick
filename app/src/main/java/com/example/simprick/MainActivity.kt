@@ -1,18 +1,16 @@
 package com.example.simprick
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.simprick.characters.AllCharViewModel
+import com.example.simprick.characters.AllCharacterAdapter
 import com.example.simprick.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
-import com.example.rickmorty.utils.showToast
-import com.example.simprick.characters.AllCharViewModel
-import com.example.simprick.characters.CharDetailsViewModel
-import com.example.simprick.characters.CharacterDetailEpoxyController
-import com.example.simprick.model.charById.CharByIdResponse
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -23,14 +21,15 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val charDetailsViewModel by viewModels<CharDetailsViewModel>()
+    //private val charDetailsViewModel by viewModels<CharDetailsViewModel>()
+
     private val allCharViewModel by viewModels<AllCharViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val epoxyController = CharacterDetailEpoxyController()
+        /*val epoxyController = CharacterDetailEpoxyController()
         charDetailsViewModel.fetchChar(13)
         charDetailsViewModel.characterByIdLiveData.observe(this) { response ->
             epoxyController.charByIdResponse = response
@@ -39,11 +38,23 @@ class MainActivity : AppCompatActivity() {
                 return@observe
             }
         }
-        binding.epoxyRv.setControllerAndBuildModels(epoxyController)
+        binding.epoxyRv.setControllerAndBuildModels(epoxyController)*/
+
+        val allCharacterAdapter = AllCharacterAdapter()
+        binding.bindAdapter(allCharacterAdapter = allCharacterAdapter)
+
         lifecycleScope.launch {
-            allCharViewModel.flow.collectLatest { pagingData: PagingData<CharByIdResponse> ->
-                Log.d(MainActivity::class.simpleName, "onCreate: $pagingData")
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                allCharViewModel.flow.collectLatest {
+                    allCharacterAdapter.submitData(it)
+                }
             }
         }
     }
+}
+
+private fun ActivityMainBinding.bindAdapter(allCharacterAdapter: AllCharacterAdapter) {
+    allCharListRv.adapter = allCharacterAdapter
+    val decoration = DividerItemDecoration(allCharListRv.context, DividerItemDecoration.VERTICAL)
+    allCharListRv.addItemDecoration(decoration)
 }
