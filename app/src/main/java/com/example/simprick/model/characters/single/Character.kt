@@ -1,6 +1,6 @@
-package com.example.simprick.model.charById
+package com.example.simprick.model.characters.single
 
-data class CharByIdResponse(
+data class Character(
     val created: String,
     val episode: List<String>,
     val gender: String,

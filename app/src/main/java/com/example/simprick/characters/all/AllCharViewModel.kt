@@ -1,10 +1,11 @@
-package com.example.simprick.characters
+package com.example.simprick.characters.all
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.example.simprick.characters.CharRepository
 import com.example.simprick.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

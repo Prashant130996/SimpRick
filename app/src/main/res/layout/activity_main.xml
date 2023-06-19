@@ -17,12 +17,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
 
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:scrollbars="vertical"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:spanCount="2"
-    android:id="@+id/allCharListRv"
-    android:layout_height="match_parent"/>
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/allCharRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:itemSpacing="@dimen/_5sdp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="12"
+        tools:listitem="@layout/model_character_list_item" />
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allCharListRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.simprick.characters.AllCharViewModel
-import com.example.simprick.characters.AllCharacterAdapter
+import com.example.simprick.characters.all.AllCharViewModel
+import com.example.simprick.characters.all.CharListPagingEpoxyController
 import com.example.simprick.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        //todo: send this to different screen when char is pressed from char list
         /*val epoxyController = CharacterDetailEpoxyController()
         charDetailsViewModel.fetchChar(13)
         charDetailsViewModel.characterByIdLiveData.observe(this) { response ->
@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         }
         binding.epoxyRv.setControllerAndBuildModels(epoxyController)*/
 
-        val allCharacterAdapter = AllCharacterAdapter()
+        //this was done before epoxy paging 3 support.
+        /*val allCharacterAdapter = AllCharacterAdapter()
         binding.bindAdapter(allCharacterAdapter = allCharacterAdapter)
 
         lifecycleScope.launch {
@@ -49,12 +50,24 @@ class MainActivity : AppCompatActivity() {
                     allCharacterAdapter.submitData(it)
                 }
             }
+        }*/
+
+        val allCharEpoxyController = CharListPagingEpoxyController()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                allCharViewModel.flow.collectLatest {
+                    allCharEpoxyController.submitData(it)
+                }
+            }
         }
+
+        binding.allCharRv.setController(allCharEpoxyController)
     }
 }
 
+/*
 private fun ActivityMainBinding.bindAdapter(allCharacterAdapter: AllCharacterAdapter) {
     allCharListRv.adapter = allCharacterAdapter
     val decoration = DividerItemDecoration(allCharListRv.context, DividerItemDecoration.VERTICAL)
     allCharListRv.addItemDecoration(decoration)
-}
+}*/

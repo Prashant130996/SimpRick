@@ -1,4 +1,4 @@
-package com.example.simprick.model.charById
+package com.example.simprick.model.characters.single
 
 data class Origin(
     val name: String,

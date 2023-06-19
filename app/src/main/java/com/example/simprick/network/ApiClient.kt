@@ -1,15 +1,15 @@
 package com.example.simprick.network
 
-import com.example.simprick.model.charById.CharByIdResponse
 import com.example.rickmorty.repo.SimpleResponse
-import com.example.simprick.model.chars.AllCharsResponse
+import com.example.simprick.model.characters.single.Character
+import com.example.simprick.model.characters.chars.AllCharsResponse
 import retrofit2.Response
 import java.lang.Exception
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(private val rickAndMortyService: RickAndMortyService) {
 
-    suspend fun getCharacterById(charId: Int): SimpleResponse<CharByIdResponse> {
+    suspend fun getCharacterById(charId: Int): SimpleResponse<Character> {
         return safeApiCall { rickAndMortyService.getCharById(charId) }
     }
 

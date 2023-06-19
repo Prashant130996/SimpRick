@@ -1,4 +1,4 @@
-package com.example.simprick.characters
+package com.example.simprick.characters.single
 
 import com.airbnb.epoxy.EpoxyController
 import com.bumptech.glide.Glide
@@ -8,7 +8,7 @@ import com.example.simprick.databinding.ModelCharacterDetailsHeaderBinding
 import com.example.simprick.databinding.ModelCharacterDetailsImageBinding
 import com.example.simprick.epoxy.LoadingEpoxyModel
 import com.example.simprick.epoxy.ViewBindingKotlinModel
-import com.example.simprick.model.charById.CharByIdResponse
+import com.example.simprick.model.characters.single.Character
 
 class CharacterDetailEpoxyController : EpoxyController() {
 
@@ -20,7 +20,7 @@ class CharacterDetailEpoxyController : EpoxyController() {
             }
         }
 
-    var charByIdResponse: CharByIdResponse? = null
+    var character: Character? = null
         set(value) {
             field = value
             if (field != null) {
@@ -34,15 +34,15 @@ class CharacterDetailEpoxyController : EpoxyController() {
             LoadingEpoxyModel().id("Loader").addTo(this)
             return
         }
-        if (charByIdResponse == null) {
+        if (character == null) {
             return
         }
         HeaderEpoxyModel(
-            charByIdResponse!!.name, charByIdResponse!!.gender, charByIdResponse!!.status
+            character!!.name, character!!.gender, character!!.status
         ).id("header").addTo(this)
-        ImageEpoxyModel(charByIdResponse!!.image).id("image").addTo(this)
-        DataPointEpoxyModel("Origin", charByIdResponse!!.origin.name).id("data_1").addTo(this)
-        DataPointEpoxyModel("Species", charByIdResponse!!.species).id("data_2").addTo(this)
+        ImageEpoxyModel(character!!.image).id("image").addTo(this)
+        DataPointEpoxyModel("Origin", character!!.origin.name).id("data_1").addTo(this)
+        DataPointEpoxyModel("Species", character!!.species).id("data_2").addTo(this)
     }
 
     data class HeaderEpoxyModel(
