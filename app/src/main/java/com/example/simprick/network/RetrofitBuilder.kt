@@ -1,5 +1,6 @@
 package com.example.simprick.network
 
+import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.simprick.utils.Constants.BASE_URL
@@ -9,6 +10,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,5 +51,11 @@ object RetrofitBuilder {
         )
 
         return builder.build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideContext(@ApplicationContext appContext: Context):Context{
+        return appContext
     }
 }
