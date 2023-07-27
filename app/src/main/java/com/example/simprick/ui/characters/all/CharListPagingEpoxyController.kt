@@ -1,4 +1,4 @@
-package com.example.simprick.characters.all
+package com.example.simprick.ui.characters.all
 
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
@@ -11,12 +11,13 @@ import com.example.simprick.epoxy.ViewBindingKotlinModel
 import com.example.simprick.model.characters.single.Character
 import java.util.Locale
 
-class CharListPagingEpoxyController : PagingDataEpoxyController<Character>() {
+class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
+    PagingDataEpoxyController<Character>() {
 
     override fun buildItemModel(currentPosition: Int, item: Character?): EpoxyModel<*> {
         return CharListItemEpoxyModel(
             character = item!!,
-            onItemClick = { }
+            onItemClick = onItemClick
         ).id("Character_${item.id}")
     }
 
@@ -28,13 +29,13 @@ class CharListPagingEpoxyController : PagingDataEpoxyController<Character>() {
 
         CharacterTitleEpoxyModel("main_family").id("main_fam_header").addTo(this)
         super.addModels(models.subList(0, 5))
-        (models.subList(5, models.size) as List<CharListItemEpoxyModel>).groupBy {
-            it.character.name[0].uppercaseChar()
-        }.forEach {
-            val character = it.key.toString().uppercase(Locale.getDefault())
-            CharacterTitleEpoxyModel(title = character).id(character).addTo(this)
-            super.addModels(it.value)
-        }
+        (models.subList(5, models.size) as List<CharListItemEpoxyModel>)
+            .groupBy { it.character.name[0].uppercaseChar() }
+            .forEach {
+                val character = it.key.toString().uppercase(Locale.getDefault())
+                CharacterTitleEpoxyModel(title = character).id(character).addTo(this)
+                super.addModels(it.value)
+            }
     }
 
     data class CharListItemEpoxyModel(
@@ -44,6 +45,7 @@ class CharListPagingEpoxyController : PagingDataEpoxyController<Character>() {
         override fun ModelCharacterListItemBinding.bind() {
             charName.text = character.name
             Glide.with(charImage).load(character.image).into(charImage)
+            root.setOnClickListener { onItemClick(character.id) }
         }
 
     }

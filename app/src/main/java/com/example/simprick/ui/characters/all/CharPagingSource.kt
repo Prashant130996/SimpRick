@@ -1,8 +1,8 @@
-package com.example.simprick.characters.all
+package com.example.simprick.ui.characters.all
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.simprick.characters.CharRepository
+import com.example.simprick.ui.characters.CharRepository
 import com.example.simprick.model.characters.single.Character
 import javax.inject.Inject
 import kotlin.math.max

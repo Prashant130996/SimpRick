@@ -1,7 +1,7 @@
-package com.example.simprick.characters
+package com.example.simprick.ui.characters
 
 import com.example.rickmorty.repo.SimpleResponse
-import com.example.simprick.characters.all.CharPagingSource
+import com.example.simprick.ui.characters.all.CharPagingSource
 import com.example.simprick.model.characters.single.Character
 import com.example.simprick.model.characters.chars.AllCharsResponse
 import com.example.simprick.network.ApiClient

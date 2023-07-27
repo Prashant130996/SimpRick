@@ -1,4 +1,4 @@
-package com.example.simprick.characters.single
+package com.example.simprick.ui.characters.single
 
 import com.airbnb.epoxy.EpoxyController
 import com.bumptech.glide.Glide

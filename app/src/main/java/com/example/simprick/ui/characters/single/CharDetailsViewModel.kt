@@ -1,10 +1,10 @@
-package com.example.simprick.characters.single
+package com.example.simprick.ui.characters.single
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.simprick.characters.CharRepository
+import com.example.simprick.ui.characters.CharRepository
 import com.example.simprick.model.characters.single.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
