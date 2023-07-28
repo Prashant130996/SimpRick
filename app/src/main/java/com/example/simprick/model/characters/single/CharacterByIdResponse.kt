@@ -1,6 +1,6 @@
 package com.example.simprick.model.characters.single
 
-data class Character(
+data class CharacterByIdResponse(
     val created: String,
     val episode: List<String>,
     val gender: String,
@@ -13,4 +13,14 @@ data class Character(
     val status: String,
     val type: String,
     val url: String
-)
+) {
+    data class Location(
+        val name: String = "",
+        val url: String = ""
+    )
+
+    data class Origin(
+        val name: String = "",
+        val url: String = ""
+    )
+}

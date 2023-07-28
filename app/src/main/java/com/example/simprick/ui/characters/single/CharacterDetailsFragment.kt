@@ -44,9 +44,9 @@ class CharacterDetailsFragment : Fragment() {
         val epoxyController = CharacterDetailEpoxyController()
 
         charDetailsViewModel.fetchChar(args.characterId)
-        charDetailsViewModel.characterByIdLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyController.character = response
-            if (response == null) {
+        charDetailsViewModel.getCharacterLiveData.observe(viewLifecycleOwner) { character ->
+            epoxyController.character = character
+            if (character == null) {
                 toast("Unsuccessful network call")
                 return@observe
             }

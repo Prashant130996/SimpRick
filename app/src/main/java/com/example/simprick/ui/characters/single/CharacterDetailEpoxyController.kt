@@ -6,9 +6,10 @@ import com.example.simprick.R
 import com.example.simprick.databinding.ModelCharacterDetailsDataPointBinding
 import com.example.simprick.databinding.ModelCharacterDetailsHeaderBinding
 import com.example.simprick.databinding.ModelCharacterDetailsImageBinding
+import com.example.simprick.domain.models.Character
 import com.example.simprick.epoxy.LoadingEpoxyModel
 import com.example.simprick.epoxy.ViewBindingKotlinModel
-import com.example.simprick.model.characters.single.Character
+import com.example.simprick.model.characters.single.CharacterByIdResponse
 
 class CharacterDetailEpoxyController : EpoxyController() {
 

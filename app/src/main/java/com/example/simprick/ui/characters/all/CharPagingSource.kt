@@ -3,21 +3,21 @@ package com.example.simprick.ui.characters.all
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.simprick.ui.characters.CharRepository
-import com.example.simprick.model.characters.single.Character
+import com.example.simprick.model.characters.single.CharacterByIdResponse
 import javax.inject.Inject
 import kotlin.math.max
 
 private const val STARTING_KEY = 1
 
 class CharPagingSource @Inject constructor(private val charRepository: CharRepository) :
-    PagingSource<Int, Character>() {
-    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
+    PagingSource<Int, CharacterByIdResponse>() {
+    override fun getRefreshKey(state: PagingState<Int, CharacterByIdResponse>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
         val char = state.closestItemToPosition(anchorPosition) ?: return null
         return ensureValidKey(key = char.id - (state.config.pageSize / 2))
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterByIdResponse> {
         // If params.key is null, it is the first load, so we start loading with STARTING_KEY
         val startKey = params.key ?: STARTING_KEY
         val range = startKey.until(startKey + params.loadSize)

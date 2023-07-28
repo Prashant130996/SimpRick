@@ -8,13 +8,13 @@ import com.example.simprick.databinding.ModelCharacterListItemBinding
 import com.example.simprick.databinding.ModelTitleListTitleBinding
 import com.example.simprick.epoxy.LoadingEpoxyModel
 import com.example.simprick.epoxy.ViewBindingKotlinModel
-import com.example.simprick.model.characters.single.Character
+import com.example.simprick.model.characters.single.CharacterByIdResponse
 import java.util.Locale
 
 class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
-    PagingDataEpoxyController<Character>() {
+    PagingDataEpoxyController<CharacterByIdResponse>() {
 
-    override fun buildItemModel(currentPosition: Int, item: Character?): EpoxyModel<*> {
+    override fun buildItemModel(currentPosition: Int, item: CharacterByIdResponse?): EpoxyModel<*> {
         return CharListItemEpoxyModel(
             character = item!!,
             onItemClick = onItemClick
@@ -39,7 +39,7 @@ class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
     }
 
     data class CharListItemEpoxyModel(
-        val character: Character,
+        val character: CharacterByIdResponse,
         val onItemClick: (Int) -> Unit
     ) : ViewBindingKotlinModel<ModelCharacterListItemBinding>(R.layout.model_character_list_item) {
         override fun ModelCharacterListItemBinding.bind() {
