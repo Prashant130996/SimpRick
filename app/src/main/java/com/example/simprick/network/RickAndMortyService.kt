@@ -2,6 +2,7 @@ package com.example.simprick.network
 
 import com.example.simprick.model.characters.single.CharacterByIdResponse
 import com.example.simprick.model.characters.chars.AllCharsResponse
+import com.example.simprick.model.episodes.allEpisodes.AllEpisodeResponse
 import com.example.simprick.model.episodes.single.EpisodeByIdResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -20,5 +21,8 @@ interface RickAndMortyService {
 
     @GET("episode/{episode-range}")
     suspend fun getEpisodeRange(@Path("episode-range") episodeRange: String): Response<List<EpisodeByIdResponse>>
+
+    @GET("episode")
+    suspend fun getEpisodePage(@Query("page") pageIndex: Int): Response<AllEpisodeResponse>
 
 }

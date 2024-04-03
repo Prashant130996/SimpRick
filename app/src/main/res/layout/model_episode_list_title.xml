@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/_5sdp"
     app:cardBackgroundColor="#E4E4E4"
-    app:cardCornerRadius="@dimen/_6sdp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/titleTv"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_6ssp"
-            android:textSize="@dimen/_17ssp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
             android:textStyle="bold|italic"
             tools:text="Header Text" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

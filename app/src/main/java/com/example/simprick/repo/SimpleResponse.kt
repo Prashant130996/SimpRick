@@ -1,4 +1,4 @@
-package com.example.rickmorty.repo
+package com.example.simprick.repo
 
 import retrofit2.Response
 import java.lang.Exception

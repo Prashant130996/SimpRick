@@ -1,8 +1,9 @@
 package com.example.simprick.network
 
-import com.example.rickmorty.repo.SimpleResponse
+import com.example.simprick.repo.SimpleResponse
 import com.example.simprick.model.characters.single.CharacterByIdResponse
 import com.example.simprick.model.characters.chars.AllCharsResponse
+import com.example.simprick.model.episodes.allEpisodes.AllEpisodeResponse
 import com.example.simprick.model.episodes.single.EpisodeByIdResponse
 import retrofit2.Response
 import java.lang.Exception
@@ -20,6 +21,10 @@ class ApiClient @Inject constructor(private val rickAndMortyService: RickAndMort
 
     suspend fun getEpisodeById(episodeId: Int): SimpleResponse<EpisodeByIdResponse> {
         return safeApiCall { rickAndMortyService.getEpisodeById(episodeId) }
+    }
+
+    suspend fun getEpisodesPage(pageIndex: Int): SimpleResponse<AllEpisodeResponse> {
+        return safeApiCall { rickAndMortyService.getEpisodePage(pageIndex) }
     }
 
     suspend fun getEpisodeRange(episodeRange: String): SimpleResponse<List<EpisodeByIdResponse>> {

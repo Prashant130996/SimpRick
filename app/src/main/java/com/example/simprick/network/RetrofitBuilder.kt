@@ -55,7 +55,7 @@ object RetrofitBuilder {
 
     @Provides
     @Singleton
-    fun provideContext(@ApplicationContext appContext: Context):Context{
+    fun provideContext(@ApplicationContext appContext: Context): Context {
         return appContext
     }
 }

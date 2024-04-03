@@ -6,15 +6,14 @@ import com.bumptech.glide.Glide
 import com.example.simprick.R
 import com.example.simprick.databinding.ModelCharacterListItemBinding
 import com.example.simprick.databinding.ModelTitleListTitleBinding
-import com.example.simprick.epoxy.LoadingEpoxyModel
+import com.example.simprick.domain.models.Character
 import com.example.simprick.epoxy.ViewBindingKotlinModel
-import com.example.simprick.model.characters.single.CharacterByIdResponse
 import java.util.Locale
 
 class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
-    PagingDataEpoxyController<CharacterByIdResponse>() {
+    PagingDataEpoxyController<Character>() {
 
-    override fun buildItemModel(currentPosition: Int, item: CharacterByIdResponse?): EpoxyModel<*> {
+    override fun buildItemModel(currentPosition: Int, item: Character?): EpoxyModel<*> {
         return CharListItemEpoxyModel(
             character = item!!,
             onItemClick = onItemClick
@@ -22,10 +21,10 @@ class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
     }
 
     override fun addModels(models: List<EpoxyModel<*>>) {
-        if (models.isEmpty()) {
+        /*if (models.isEmpty()) {
             LoadingEpoxyModel().id("loading").addTo(this)
             return
-        }
+        }*/
 
         CharacterTitleEpoxyModel("main_family").id("main_fam_header").addTo(this)
         super.addModels(models.subList(0, 5))
@@ -39,7 +38,7 @@ class CharListPagingEpoxyController(private val onItemClick: (Int) -> Unit) :
     }
 
     data class CharListItemEpoxyModel(
-        val character: CharacterByIdResponse,
+        val character: Character,
         val onItemClick: (Int) -> Unit
     ) : ViewBindingKotlinModel<ModelCharacterListItemBinding>(R.layout.model_character_list_item) {
         override fun ModelCharacterListItemBinding.bind() {

@@ -26,19 +26,19 @@ class CharacterDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCharacterDetailsBinding.inflate(inflater,container,false)
+        _binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        setClickListener()
+        //setClickListener()
     }
 
-    private fun setClickListener() = binding.run {
+    /*private fun setClickListener() = binding.run {
         toolbar.goBackIv.setOnClickListener { findNavController().popBackStack() }
-    }
+    }*/
 
     private fun initViews() {
         val epoxyController = CharacterDetailEpoxyController()
@@ -48,6 +48,7 @@ class CharacterDetailsFragment : Fragment() {
             epoxyController.character = character
             if (character == null) {
                 toast("Unsuccessful network call")
+                findNavController().navigateUp()
                 return@observe
             }
         }

@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.example.simprick.databinding.FragmentAllCharactersBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CharacterListFragment : Fragment() {
+class AllCharactersFragment : Fragment() {
 
     private var _binding: FragmentAllCharactersBinding? = null
     private val binding get() = _binding!!
@@ -40,12 +42,19 @@ class CharacterListFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            allCharEpoxyController.loadStateFlow.collect {
+                binding.prependProgress.isVisible = it.source.prepend is LoadState.Loading
+                binding.appendProgress.isVisible = it.source.append is LoadState.Loading
+            }
+        }
         binding.allCharRv.setController(allCharEpoxyController)
     }
 
     private fun onCharacterSelected(characterId: Int) {
         val action =
-            CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(
+            AllCharactersFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(
                 characterId = characterId
             )
         findNavController().navigate(action)

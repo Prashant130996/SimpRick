@@ -1,6 +1,6 @@
 package com.example.simprick.ui.characters
 
-import com.example.rickmorty.repo.SimpleResponse
+import com.example.simprick.repo.SimpleResponse
 import com.example.simprick.domain.mappers.CharacterMapper
 import com.example.simprick.domain.models.Character
 import com.example.simprick.ui.characters.all.CharPagingSource
@@ -37,7 +37,4 @@ class CharRepository @Inject constructor(private val apiClient: ApiClient) {
         if (request.failed or !request.isSuccessful) return null
         return request
     }
-
-    fun charPagingSource() = CharPagingSource(CharRepository(apiClient))
-
 }

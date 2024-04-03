@@ -19,6 +19,6 @@ class AllCharViewModel @Inject constructor(private val charRepository: CharRepos
             pageSize = Constants.PAGE_SIZE,
             prefetchDistance = Constants.PREFETCH_DISTANCE,
             enablePlaceholders = false
-        ), pagingSourceFactory = { charRepository.charPagingSource() }
+        ), pagingSourceFactory = { CharPagingSource(charRepository) }
     ).flow.cachedIn(viewModelScope)
 }

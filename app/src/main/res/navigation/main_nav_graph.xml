@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/characterListFragment"
-        android:name="com.example.simprick.ui.characters.all.CharacterListFragment"
-        android:label="CharacterListFragment"
+        android:name="com.example.simprick.ui.characters.all.AllCharactersFragment"
+        android:label="Rick&amp;Morty"
         tools:layout="@layout/fragment_all_characters">
         <action
             android:id="@+id/action_characterListFragment_to_characterDetailsFragment"
@@ -22,13 +22,19 @@
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.example.simprick.ui.characters.single.CharacterDetailsFragment"
-        android:label="CharacterDetailsFragment"
-        tools:layout="@layout/fragment_character_details" >
+        android:label="Character Details"
+        tools:layout="@layout/fragment_character_details">
         <argument
             android:name="characterId"
-            app:argType="integer"
-            android:defaultValue="13" />
+            android:defaultValue="13"
+            app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/allEpisodesFragment"
+        android:name="com.example.simprick.ui.episodes.AllEpisodesFragment"
+        android:label="All Episodes"
+        tools:layout="@layout/fragment_all_episodes" />
 
 
 </navigation>
